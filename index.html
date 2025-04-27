@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPA Calculator | Dev Queens</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Prevent Clickjacking -->
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <!-- Disable content sniffing -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <!-- Referrer Policy -->
+    <meta name="referrer" content="no-referrer">
+</head>
+<body>
+    <header>
+        <h1>GPA CALCULATOR</h1>
+        <nav class="navbar">
+            <div class="menu-icon" id="menu-icon">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <!-- <ul class="nav-links" id="nav-links">
+                <li><a href="#">HOME</a></li>
+                <li><a href="#">SOLUTIONS</a></li>
+            </ul> -->
+        </nav>
+    </header>
+
+    <!-- Introduction Sections -->
+    <div id="intro-section-container">
+        <div class="intro-section">
+            <h2><i class="fas fa-info-circle"></i> Understanding GPA, CGPA & SGPA</h2>
+            <p>Welcome to our comprehensive GPA Calculator tool! Whether you're calculating your current academic standing or planning future course loads, understanding the differences between GPA, CGPA, and SGPA is essential for tracking your academic progress.</p>
+            
+            <div class="info-cards">
+                <div class="info-card">
+                    <h3>What is GPA?</h3>
+                    <p><span class="highlight">Grade Point Average (GPA)</span> is a standardized measurement of academic achievement. </p>
+                    <p> It represents the average value of the accumulated final grades earned in courses over time, ranging typically from 0 to 4.0 or 0 to 10.0, depending on the educational system.</p>
+                    <p><strong>Purpose:</strong> </p>
+                    <p> ⚡serves as a universal metric for academic performance, allowing institutions to assess student achievement consistently.</p>
+                    <p> ⚡It's often used for scholarship eligibility, honors determination, and entrance requirements for higher education.</p>
+                </div>
+                
+                <div class="info-card">
+                    <h3>What is CGPA?</h3>
+                    <p><span class="highlight">Cumulative Grade Point Average (CGPA)</span> represents the overall academic performance across all semesters or terms completed. </p>
+                    <p> It is calculated by dividing the sum of grade points earned in all courses by the total credit hours attempted.</p>
+                    <p><strong>Purpose:</strong> </p>
+                    <p> ⚡Provides a comprehensive view of your academic journey, reflecting your overall performance throughout your educational program. </p>
+                    <p> ⚡It's particularly important for graduation requirements, job applications, and higher education admissions.</p>
+                </div>
+                
+                <div class="info-card">
+                    <h3>What is SGPA?</h3>
+                    <p><span class="highlight">Semester Grade Point Average (SGPA)</span> is the average of grade points obtained in all courses registered in a specific semester.</p>
+                    <p> Each course is weighted according to its credit hours.</p>
+                    <p><strong>Purpose:</strong> </p>
+                    <p> ⚡SGPA helps track academic performance in a particular semester, allowing students to monitor term-specific progress.</p>
+                    <p> ⚡It's useful for identifying strengths and weaknesses in specific academic periods and making adjustments to study strategies.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- GPA Calculator -->
+    <div class="container">
+        <h2><i class="fas fa-graduation-cap"></i> GPA Calculator</h2>
+
+        <div id="subjects-container">
+            <!-- Subject rows will be added here -->
+        </div>
+
+        <div class="form-group" style="display: flex; gap: 1rem; margin-top: 1rem;">
+            <button onclick="addSubjectRow()" class="btn" style="flex: 1;">
+                <i class="fas fa-plus"></i> Add Subject
+            </button>
+            <button onclick="calculateCGPA()" class="btn" style="flex: 1;">
+                <i class="fas fa-calculator"></i> Calculate GPA
+            </button>
+        </div>
+
+        <div class="result-card" id="cgpa-calc-result">
+            <div class="result-title">Your GPA Result</div>
+            <div class="result-value" id="cgpa-calc-value">0.00</div>
+        </div>
+    </div>
+
+    <!-- CGPA Calculator Section -->
+    <div class="container">
+        <h2><i class="fas fa-chart-line"></i> CGPA Calculator</h2>
+
+        <div id="gpa-container">
+            <!-- GPA rows will be added here -->
+        </div>
+
+        <div class="form-group" style="display: flex; gap: 1rem; margin-top: 1rem;">
+            <button onclick="addSemesterRow()" class="btn" style="flex: 1;">
+                <i class="fas fa-plus"></i> Add Semester
+            </button>
+            <button onclick="calculateOverallGPA()" class="btn" style="flex: 1;">
+                <i class="fas fa-calculator"></i> Calculate CGPA
+            </button>
+        </div>
+
+        <div class="result-card" id="gpa-calc-result">
+            <div class="result-title">Your Overall CGPA Result</div>
+            <div class="result-value" id="gpa-calc-value">0.00</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2><i class="fas fa-calculator"></i> CGPA & Percentage Converter</h2>
+
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="cgpa-to-percentage">CGPA to Percentage</button>
+            <button class="tab-btn" data-tab="percentage-to-cgpa">Percentage to CGPA</button>
+        </div>
+
+        <!-- CGPA to Percentage Tab -->
+        <div class="tab-content active" id="cgpa-to-percentage">
+            <div class="university-selection">
+                <h3>Select Education Board/University</h3>
+                <div class="university-btns">
+                    <button class="university-btn active" data-formula="cgpa * 9.5" data-uni="cbse">CBSE</button>
+                    <button class="university-btn" data-formula="cgpa * 10" data-uni="general">General Indian
+                        Universities</button>
+                    <button class="university-btn" data-formula="(cgpa - 0.5) * 10" data-uni="mumbai">University of
+                        Mumbai</button>
+                    <button class="university-btn" data-formula="(cgpa - 0.75) * 10" data-uni="anna">Anna
+                        University</button>
+                </div>
+            </div>
+
+            <div class="conversion-form">
+                <div class="form-group">
+                    <label for="cgpa-input">Enter your CGPA (0-10)</label>
+                    <input type="number" id="cgpa-input" class="form-control" min="0" max="10" step="0.01"
+                        placeholder="Enter CGPA">
+                </div>
+
+                <div class="form-group">
+                    <button id="convert-cgpa-btn" class="btn">Convert to Percentage</button>
+                </div>
+            </div>
+
+            <div class="result-card" id="cgpa-result">
+                <div class="result-title">Your Percentage</div>
+                <div class="result-value" id="percentage-value">95.00%</div>
+
+                <div class="formula-box">
+                    <div class="formula-title">Formula Used:</div>
+                    <div class="formula-text" id="cgpa-formula">Percentage = CGPA × 9.5</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Percentage to CGPA Tab -->
+        <div class="tab-content" id="percentage-to-cgpa">
+            <div class="university-selection">
+                <h3>Select Education Board/University</h3>
+                <div class="university-btns">
+                    <button class="university-btn active" data-formula="percentage / 9.5" data-uni="cbse">CBSE</button>
+                    <button class="university-btn" data-formula="percentage / 10" data-uni="general">General Indian
+                        Universities</button>
+                    <button class="university-btn" data-formula="(percentage / 10) + 0.5" data-uni="mumbai">University
+                        of Mumbai</button>
+                    <button class="university-btn" data-formula="(percentage / 10) + 0.75" data-uni="anna">Anna
+                        University</button>
+                </div>
+            </div>
+
+            <div class="conversion-form">
+                <div class="form-group">
+                    <label for="percentage-input">Enter your Percentage (0-100)</label>
+                    <div class="input-group">
+                        <input type="number" id="percentage-input" class="form-control" min="0" max="100" step="0.01"
+                            placeholder="Enter Percentage">
+                        <div class="input-group-append">%</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button id="convert-percentage-btn" class="btn">Convert to CGPA</button>
+                </div>
+            </div>
+
+            <div class="result-card" id="percentage-result">
+                <div class="result-title">Your CGPA</div>
+                <div class="result-value" id="cgpa-value">9.50</div>
+
+                <div class="formula-box">
+                    <div class="formula-title">Formula Used:</div>
+                    <div class="formula-text" id="percentage-formula">CGPA = Percentage ÷ 9.5</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2><i class="fas fa-table"></i> CGPA to Percentage Conversion Table</h2>
+
+        <table class="conversion-table">
+            <thead>
+                <tr>
+                    <th>Educational Board/University</th>
+                    <th>CGPA to Percentage Formula</th>
+                    <th>Percentage to CGPA Formula</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>CBSE</td>
+                    <td>Percentage = CGPA × 9.5</td>
+                    <td>CGPA = Percentage ÷ 9.5</td>
+                </tr>
+                <tr>
+                    <td>General Indian Universities</td>
+                    <td>Percentage = CGPA × 10</td>
+                    <td>CGPA = Percentage ÷ 10</td>
+                </tr>
+                <tr>
+                    <td>University of Mumbai</td>
+                    <td>Percentage = (CGPA - 0.5) × 10</td>
+                    <td>CGPA = (Percentage ÷ 10) + 0.5</td>
+                </tr>
+                <tr>
+                    <td>Anna University</td>
+                    <td>Percentage = (CGPA - 0.75) × 10</td>
+                    <td>CGPA = (Percentage ÷ 10) + 0.75</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Contact Section -->
+    <div class="contact-section">
+        <div class="contact-icon">
+            <i class="fas fa-envelope"></i>
+        </div>
+        <div class="contact-content">
+            <h3>Have any queries?</h3>
+            <p>We're here to help you! Feel free to reach out with any questions about our GPA calculator.</p>
+        </div>
+        <a href="mailto:techy5788@gmail.com" class="contact-button">
+            <i class="fas fa-paper-plane"></i> Send an email: techy5788@gmail.com
+        </a>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-copyright">
+            <h2>Designed and Developed by <span>Dev Queens</span></h2>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+</body>
+
+</html>
