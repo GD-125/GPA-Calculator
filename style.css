@@ -368,19 +368,19 @@ label {
 .intro-section h2 {
     color: #4a4de7;
     margin-bottom: 1rem;
-    font-size: 2rem;
+    font-size: 1.2rem;
 }
 
 .intro-section p {
     margin-bottom: 1rem;
     line-height: 1.7;
-    font-size: 1.2rem;
+    font-size: 0.9rem;
 }
 
 .intro-section .highlight {
     color: #4a4de7;
     font-weight: 600;
-    font-size: 1.4rem;
+    font-size: 1rem;
 }
 
 .info-cards {
@@ -406,7 +406,7 @@ label {
 .info-card h3 {
     color: #4a4de7;
     margin-bottom: 0.8rem;
-    font-size: 1.2rem;
+    font-size: 1rem;
 }
 
 /* Contact Section */
